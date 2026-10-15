@@ -1,0 +1,55 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Kotlin and Gradle generated files
+.kotlin/
+**/build/
+
+# Android Studio local files
+.idea/
+*.iml
+
+# Firebase configuration and local secrets
+.env
+.env.*
+!.env.example
+
+# Firebase Functions dependencies and generated output
+functions/node_modules/
+functions/lib/
+
+# Local logs
+*.log
+
+# Kotlin and Gradle generated files
+.kotlin/
+**/build/
+
+# Android Studio local files
+.idea/
+*.iml
+
+# Firebase configuration and local secrets
+.env
+.env.*
+!.env.example
+
+# Firebase Functions dependencies and generated output
+functions/node_modules/
+functions/lib/
+
+# Local logs
+*.log

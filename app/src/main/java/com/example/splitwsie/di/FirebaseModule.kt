@@ -1,0 +1,42 @@
+package com.example.splitwsie.di
+
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.functions.FirebaseFunctions
+import com.google.firebase.storage.FirebaseStorage
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+@Module
+@InstallIn(SingletonComponent::class)
+object FirebaseModule {
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFirestore(): FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseFunctions(): FirebaseFunctions {
+        // We use region asia-south1 by default if that's where the functions are deployed,
+        // but default is us-central1 unless specified.
+        return FirebaseFunctions.getInstance()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage {
+        return FirebaseStorage.getInstance()
+    }
+}

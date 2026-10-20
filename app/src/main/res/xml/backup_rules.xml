@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Backup policy for devices below API 31.
+
+    Only the Room database is backed up, so a user restoring to a new device keeps their
+    groups, expenses and payment records. Everything else - including the session file, which
+    points at a user id that is meaningless on a restored device - is excluded by omission.
+-->
+<full-backup-content>
+    <include domain="database" path="." />
+</full-backup-content>

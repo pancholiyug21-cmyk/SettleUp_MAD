@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Backup and device-transfer policy for API 31+.
+
+    Same reasoning as backup_rules.xml: keep the financial history, and let the session file be
+    excluded by omission so a restored device starts at sign-in rather than resuming a session
+    for a profile that may not exist.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <include domain="database" path="." />
+    </cloud-backup>
+    <device-transfer>
+        <include domain="database" path="." />
+    </device-transfer>
+</data-extraction-rules>

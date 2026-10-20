@@ -1,0 +1,37 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Function to check if a user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Function to check if a user is a member of a specific group
+    // In Storage, we can use firestore.get to read the Firestore group document
+    function isGroupMember(groupId) {
+      return firestore.exists(/databases/(default)/documents/groups/$(groupId)/members/$(request.auth.uid));
+    }
+
+    // Function to validate image uploads
+    function isValidImage() {
+      return request.resource.contentType.matches('image/.*') &&
+             request.resource.size < 5 * 1024 * 1024; // 5MB limit
+    }
+
+    match /receipts/{groupId}/{expenseId}/{fileId} {
+      // For non-group expenses (groupId == "no-group"), we could restrict to participants,
+      // but without group structure we just rely on authentication.
+      // For groups, verify the user is a member of the group in Firestore.
+      allow read: if isAuthenticated() &&
+                  (groupId == 'no-group' || isGroupMember(groupId));
+
+      allow write: if isAuthenticated() &&
+                   (groupId == 'no-group' || isGroupMember(groupId)) &&
+                   isValidImage();
+
+      allow delete: if isAuthenticated() &&
+                    (groupId == 'no-group' || isGroupMember(groupId));
+    }
+  }
+}
